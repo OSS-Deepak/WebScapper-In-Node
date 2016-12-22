@@ -57,7 +57,6 @@ app.get('/scrape',function scrape(req,res){
 						productPrice = $(this).find('.sku-container > .content-wrap > .sku-price > .sku-offer').text();
 						otherInfo = $(this).find('.sku-container > .content-wrap > .sku-pack').text();
 						product_1mg_id = $(this).find('.sku-container > .content-wrap > a').attr('href');
- 						//productArray.push({productName:productName,productPrice:productPrice,otherInfo:otherInfo});
 						connection.query({
 							sql: insertProductQuery, 
 							values : [productName,productPrice,0,otherInfo,'patanjali',product_1mg_id]
@@ -67,6 +66,11 @@ app.get('/scrape',function scrape(req,res){
 							console.log(results);
 							console.log(fields);
 						});
+						//productArray.push({productName:productName,productPrice:productPrice,otherInfo:otherInfo});	
+						/*fs.writeFile('output.txt',JSON.stringify(productArray),function(err){
+							if(err) throw err;
+							console.log('File has been created and saved');
+						});*/
 					});
 
 				});
@@ -79,13 +83,3 @@ app.get('/scrape',function scrape(req,res){
 server.listen(port,function(req,res){
 	console.log(`Server started to listen at ${port}`);
 });
-
-
-
-
-
-//write into file
-/*fs.writeFile('output.txt',JSON.stringify(productArray),function(err){
-	if(err) throw err;
-	console.log('File has been created and saved');
-});*/
